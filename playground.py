@@ -205,6 +205,11 @@ def main():
     # setup base environment
     env_cfg = QuadrupedEnvCfg()
     env = ManagerBasedEnv(cfg=env_cfg)
+    print("========================================")
+    print("Examine the terrain meshes:")
+    print(env.scene.terrain.meshes)
+    print(env.scene.terrain.meshes['terrain'].vertices)
+    print("========================================")
 
     # load level policy
     policy_path = ISAACLAB_NUCLEUS_DIR + "/Policies/ANYmal-C/HeightScan/policy.pt"
