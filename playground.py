@@ -209,6 +209,7 @@ def main():
     print("Examine the terrain meshes:")
     print(env.scene.terrain.meshes)
     print(env.scene.terrain.meshes['terrain'].vertices)
+    print(env.scene.sensors["height_scanner"])
     print("========================================")
 
     # load level policy
@@ -237,6 +238,13 @@ def main():
             obs, _ = env.step(action)
             # update counter
             count += 1
+
+            print("==============================")
+            print("See Sensor Ray Cast Data:")
+            print(env.scene.sensors["height_scanner"].data.ray_hits_w.shape)
+            #See the ray in batches, each batch represent one of the robot, each batch has 187 rays
+            #Possible to define custom ray caster detector
+            print("==============================")
 
     # close the environment
     env.close()
