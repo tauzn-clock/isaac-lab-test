@@ -244,6 +244,8 @@ def main():
             print(env.scene.sensors["height_scanner"].data.ray_hits_w.shape)
             #See the ray in batches, each batch represent one of the robot, each batch has 187 rays
             #Possible to define custom ray caster detector
+            #It is not a local height sensor on each foot rather a global height sensor over the entire robot
+            #For task planning task, it may be possible to increase the density of the sensor, although attempts to do so do crash the simulation on my PC
             print("==============================")
 
     # close the environment
