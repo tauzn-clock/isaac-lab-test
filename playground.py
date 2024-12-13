@@ -56,6 +56,8 @@ from omni.isaac.lab.utils import configclass
 from omni.isaac.lab.utils.assets import ISAACLAB_NUCLEUS_DIR, check_file_path, read_file
 from omni.isaac.lab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 
+from get_stepable_region import get_stepable_region
+
 ##
 # Pre-defined configs
 ##
@@ -207,8 +209,8 @@ def main():
     env = ManagerBasedEnv(cfg=env_cfg)
     print("========================================")
     print("Examine the terrain meshes:")
-    print(env.scene.terrain.meshes)
-    print(env.scene.terrain.meshes['terrain'].vertices)
+    print(env.scene.terrain.meshes["terrain"])
+    print(get_stepable_region(env.scene.terrain.meshes['terrain']))
     print(env.scene.sensors["height_scanner"])
     print("========================================")
 
@@ -239,14 +241,14 @@ def main():
             # update counter
             count += 1
 
-            print("==============================")
-            print("See Sensor Ray Cast Data:")
-            print(env.scene.sensors["height_scanner"].data.ray_hits_w.shape)
+            #print("==============================")
+            #print("See Sensor Ray Cast Data:")
+            #print(env.scene.sensors["height_scanner"].data.ray_hits_w.shape)
             #See the ray in batches, each batch represent one of the robot, each batch has 187 rays
             #Possible to define custom ray caster detector
             #It is not a local height sensor on each foot rather a global height sensor over the entire robot
             #For task planning task, it may be possible to increase the density of the sensor, although attempts to do so do crash the simulation on my PC
-            print("==============================")
+            #print("==============================")
 
     # close the environment
     env.close()

@@ -1,13 +1,24 @@
 import open3d as o3d
 import numpy as np
 import trimesh
-from utils import *
+
+def angle_to_z(vertices):
+    """Calculate the angle of the vertices with respect to the z-axis."""
+
+    cross_product = np.cross((vertices[1] - vertices[0]), (vertices[2] - vertices[0]))
+    cross_product = cross_product / (np.linalg.norm(cross_product) + 1e-7)
+
+    angle_1 = np.arccos(np.dot(cross_product, np.array([0, 0, 1])))
+    angle_2 = np.arccos(np.dot(cross_product, np.array([0, 0, -1])))
+
+    return min(abs(angle_1), abs(angle_2))
+
 
 
 def get_stepable_region(mesh):
     # Extract vertices and faces as numpy arrays
     vertices = np.asarray(mesh.vertices)
-    faces = np.asarray(mesh.triangles)
+    faces = np.asarray(mesh.faces).astype(np.uint16)
 
     print("Verices: ", len(vertices), "Faces: ", len(faces))
 
